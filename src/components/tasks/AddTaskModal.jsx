@@ -1,8 +1,11 @@
 import { useForm } from "react-hook-form";
 import MyModal from "../../ui/Modal";
+import { useDispatch } from "react-redux";
+import { addTask } from "../../redux/features/tasks/tasks";
 
 const AddTaskModal = ({ isOpen, setIsOpen }) => {
   const { register, handleSubmit, reset } = useForm();
+  const dispatch = useDispatch();
 
   const onCancel = () => {
     reset();
@@ -10,8 +13,8 @@ const AddTaskModal = ({ isOpen, setIsOpen }) => {
   };
 
   const onSubmit = (data) => {
+    dispatch(addTask(data));
     onCancel();
-    console.log(data);
   };
   return (
     <MyModal isOpen={isOpen} setIsOpen={setIsOpen} title={"Add Task"}>

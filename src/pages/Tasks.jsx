@@ -1,9 +1,8 @@
 import { BellIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { useState } from "react";
+import AddTaskModal from "../components/tasks/AddTaskModal";
 import MyTasks from "../components/tasks/MyTasks";
 import TaskCard from "../components/tasks/TaskCard";
-import { useState } from "react";
-import MyModal from "../ui/Modal";
-import AddTaskModal from "../components/tasks/AddTaskModal";
 
 const Tasks = () => {
   const [isOpen, setIsOpen] = useState(false);
