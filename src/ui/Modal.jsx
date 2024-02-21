@@ -1,7 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 
-export default function MyModal({ isOpen, setIsOpen }) {
+export default function MyModal({ isOpen, setIsOpen, title, children }) {
   function closeModal() {
     setIsOpen(false);
   }
@@ -38,14 +38,9 @@ export default function MyModal({ isOpen, setIsOpen }) {
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
-                    Payment successful
+                    {title}
                   </Dialog.Title>
-                  <div className="mt-2">
-                    <p className="text-sm text-gray-500">
-                      Your payment has been successfully submitted. We’ve sent
-                      you an email with all of the details of your order.
-                    </p>
-                  </div>
+                  <div className="mt-2">{children}</div>
 
                   <div className="mt-4">
                     <button
