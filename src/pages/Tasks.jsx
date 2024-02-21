@@ -3,8 +3,10 @@ import { useState } from "react";
 import AddTaskModal from "../components/tasks/AddTaskModal";
 import MyTasks from "../components/tasks/MyTasks";
 import TaskCard from "../components/tasks/TaskCard";
+import { useSelector } from "react-redux";
 
 const Tasks = () => {
+  const { task } = useSelector((state) => state.tasks);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -46,7 +48,9 @@ const Tasks = () => {
               </p>
             </div>
             <div className="space-y-3">
-              <TaskCard />
+              {task.map((t) => (
+                <TaskCard key={t.id} task={t} />
+              ))}
             </div>
           </div>
           <div className="relative h-[800px] overflow-auto">
@@ -57,19 +61,22 @@ const Tasks = () => {
               </p>
             </div>
             <div className="space-y-3">
-              <TaskCard />
-              <TaskCard />
+              {task.map((t) => (
+                <TaskCard key={t.id} task={t} />
+              ))}
             </div>
           </div>
           <div className="relative h-[800px] overflow-auto">
             <div className="flex sticky top-0 justify-between bg-[#D3DDF9] p-5 rounded-md mb-3">
-              <h1>Up Next</h1>
+              <h1>Complete</h1>
               <p className="bg-primary text-white w-6 h-6 grid place-content-center rounded-md">
                 0
               </p>
             </div>
             <div className="space-y-3">
-              <TaskCard />
+              {task.map((t) => (
+                <TaskCard key={t.id} task={t} />
+              ))}
             </div>
           </div>
         </div>
