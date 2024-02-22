@@ -9,6 +9,10 @@ const Tasks = () => {
   const { task } = useSelector((state) => state.tasks);
   const [isOpen, setIsOpen] = useState(false);
 
+  const pendingTasks = task.filter((t) => t.status === "pending");
+  const runningTasks = task.filter((t) => t.status === "running");
+  const completedTasks = task.filter((t) => t.status === "completed");
+
   return (
     <div className="h-screen grid grid-cols-12">
       <div className="col-span-9 px-10 pt-10">
@@ -44,11 +48,11 @@ const Tasks = () => {
             <div className="flex sticky top-0 justify-between bg-[#D3DDF9] p-5 rounded-md mb-3">
               <h1>Up Next</h1>
               <p className="bg-primary text-white w-6 h-6 grid place-content-center rounded-md">
-                0
+                {pendingTasks.length}
               </p>
             </div>
             <div className="space-y-3">
-              {task.map((t) => (
+              {pendingTasks.map((t) => (
                 <TaskCard key={t.id} task={t} />
               ))}
             </div>
@@ -57,11 +61,11 @@ const Tasks = () => {
             <div className="flex sticky top-0 justify-between bg-[#D3DDF9] p-5 rounded-md mb-3">
               <h1>In Progress</h1>
               <p className="bg-primary text-white w-6 h-6 grid place-content-center rounded-md">
-                0
+                {runningTasks.length}
               </p>
             </div>
             <div className="space-y-3">
-              {task.map((t) => (
+              {runningTasks.map((t) => (
                 <TaskCard key={t.id} task={t} />
               ))}
             </div>
@@ -70,11 +74,11 @@ const Tasks = () => {
             <div className="flex sticky top-0 justify-between bg-[#D3DDF9] p-5 rounded-md mb-3">
               <h1>Complete</h1>
               <p className="bg-primary text-white w-6 h-6 grid place-content-center rounded-md">
-                0
+                {completedTasks.length}
               </p>
             </div>
             <div className="space-y-3">
-              {task.map((t) => (
+              {completedTasks.map((t) => (
                 <TaskCard key={t.id} task={t} />
               ))}
             </div>
