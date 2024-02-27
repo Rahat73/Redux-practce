@@ -5,11 +5,14 @@ import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import auth from "../../utils/firebase.config";
 import { setLoading, setUser } from "../../redux/features/user/userSlice";
+import toast from "react-hot-toast";
 
 const PrivateRoute = ({ children }) => {
   const { pathname } = useLocation();
 
-  const { email, isLoading } = useSelector((state) => state.userSlice);
+  const { email, isLoading, isError, error } = useSelector(
+    (state) => state.userSlice
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,6 +25,13 @@ const PrivateRoute = ({ children }) => {
       }
     });
   }, []);
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(error);
+      console.log(error);
+    }
+  }, [isError, error]);
 
   if (isLoading) {
     return <Loading />;
