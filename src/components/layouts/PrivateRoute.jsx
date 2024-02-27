@@ -1,18 +1,15 @@
-import { Navigate, useLocation } from "react-router-dom";
-import Loading from "./Loading";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import auth from "../../utils/firebase.config";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Navigate, useLocation } from "react-router-dom";
 import { setLoading, setUser } from "../../redux/features/user/userSlice";
-import toast from "react-hot-toast";
+import auth from "../../utils/firebase.config";
+import Loading from "./Loading";
 
 const PrivateRoute = ({ children }) => {
   const { pathname } = useLocation();
 
-  const { email, isLoading, isError, error } = useSelector(
-    (state) => state.userSlice
-  );
+  const { email, isLoading } = useSelector((state) => state.userSlice);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,14 +21,7 @@ const PrivateRoute = ({ children }) => {
         dispatch(setLoading(false));
       }
     });
-  }, []);
-
-  useEffect(() => {
-    if (isError) {
-      toast.error(error);
-      console.log(error);
-    }
-  }, [isError, error]);
+  }, [dispatch]);
 
   if (isLoading) {
     return <Loading />;
