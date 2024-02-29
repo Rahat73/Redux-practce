@@ -1,8 +1,8 @@
-import { useSelector } from 'react-redux';
-import Modal from '../ui/Modal';
+import { useGetTasksQuery } from "../../redux/features/api/taskApi";
+import Modal from "../ui/Modal";
 
 const TaskDetailsModal = ({ isOpen, setIsOpen, id }) => {
-  const { tasks } = useSelector((state) => state.tasksSlice);
+  const { data: tasks } = useGetTasksQuery();
 
   const task = tasks.find((item) => item.id === id);
 
